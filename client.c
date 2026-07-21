@@ -53,6 +53,25 @@ int displ()
     return 0;
 }
 
+int recvAll(int sock, void *buffer, int size)
+{
+    int total = 0;
+
+    while (total < size)
+    {
+        int n = recv(sock,
+                     (char *)buffer + total,
+                     size - total,
+                     0);
+
+        if (n <= 0)
+            return n;
+
+        total += n;
+    }
+
+    return total;
+}
 
 int main() {
     char line[1024];
@@ -118,7 +137,8 @@ int main() {
         
 
         //recv(network_socket, &game, sizeof(game), 0);
-        bytes = recv(network_socket, &game, sizeof(game), 0);
+        bytes = recvAll(network_socket, &game, sizeof(game));
+        //bytes = recv(network_socket, &game, sizeof(game), 0);
 
         displ();
 

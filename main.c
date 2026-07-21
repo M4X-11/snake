@@ -175,7 +175,7 @@ int main()
     game.connections = connected;
 
 
-    // GAME LOOP GOES HERE
+    // GAME LOOP
     while (1)
     {
         // receive player input

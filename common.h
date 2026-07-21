@@ -21,7 +21,7 @@ typedef struct {
     int oldY;
     int points;
     int direction;
-    Segment body[1000];
+    Segment body[50];
 } Snake;
 
 
