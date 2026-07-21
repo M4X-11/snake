@@ -30,7 +30,7 @@ typedef struct {
     int socket;
     Snake snake;
     int connected;
-    int dead;
+    char dead;
 } Player;
 
 //Player players[MAX_PLAYERS];

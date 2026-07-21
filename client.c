@@ -46,8 +46,8 @@ int displ()
         mvaddch(game.players[i].snake.y + 2, game.players[i].snake.x + 1, '@');
     }
     
-    if (game.players[me].dead==1){
-        mvprintw(19, 0, "DEAD");
+    if (game.players[me].dead=='d'){
+        mvprintw(20, 0, "DEAD");
     }
 
 

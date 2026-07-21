@@ -170,7 +170,7 @@ int main()
         game.players[i].snake.oldY = game.players[i].snake.y;
         game.players[i].snake.direction = RIGHT;
         game.players[i].snake.points = 0;
-        game.players[i].dead=0;
+        game.players[i].dead='a';
     }
 
     //init
@@ -275,9 +275,9 @@ int main()
             for (int i=0; i<connected; i++){
                 for (int j=0; j<connected; j++){
                     if (isBodyAt(game.players[i].snake.x, game.players[i].snake.y, game.players[j].snake.body, game.players[j].snake.points)==1){
-                        game.players[i].snake.x=-1;
-                        game.players[i].snake.y=-1;
-                        game.players[i].dead=1;
+                        game.players[i].snake.x=-1000;
+                        game.players[i].snake.y=-1000;
+                        game.players[i].dead='d';
                         printf("player[%d] dead", i);
                         fflush(stdout);
                     }
