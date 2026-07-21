@@ -2,3 +2,23 @@
 
 # snake
 snake but multiplayer
+
+# Installation
+1:
+```
+git clone https://github.com/M4X-11/snake.git
+```
+2:
+debian:
+```
+sudo apt install libncurses-dev
+```
+arch:
+```
+sudo pacman -S gcc ncurses
+```
+3:
+```
+gcc main.c -o main -lncurses
+gcc client.c -o snake -lncurses
+```
