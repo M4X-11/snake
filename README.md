@@ -3,6 +3,8 @@
 # snake
 snake but multiplayer
 
+<img width="430" height="336" alt="terminalS" src="https://github.com/user-attachments/assets/adf1a6dc-64c4-4782-b0da-13a166f61ca0" />
+
 # Installation
 1:
 ```
