@@ -33,13 +33,13 @@ int isBodyAt(int x, int y, Segment body[], int bodyLength)
 
 int main()
 {
+    srand(time(NULL));
     int mode;
     int server_socket;
     int connected = 0;
     int gameStarted = 0;
     
-    game.apple[0].x = -1;
-    game.apple[0].y = -1;
+    appleRand(&game.apple[0].x, &game.apple[0].y);
 
     // Create socket
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -253,15 +253,20 @@ int main()
             }
 
             //apple
-            if (game.apple[0].x == -1) {
-                appleRand(&game.apple[0].x, &game.apple[0].y);
-            }
+            
 
             for (int i=0; i<connected; i++){
-                if (game.players[i].snake.x==game.apple[0].x && game.players[i].snake.y==game.apple[0].y){
+                if (game.players[i].snake.x == game.apple[0].x &&
+                    game.players[i].snake.y == game.apple[0].y)
+                {
                     game.players[i].snake.points++;
-                    game.apple[0].y=-1000;
-                    game.apple[0].x=-1000;
+
+                    do {
+                        appleRand(&game.apple[0].x, &game.apple[0].y);
+                    } while (isBodyAt(game.apple[0].x,
+                                    game.apple[0].y,
+                                    game.players[i].snake.body,
+                                    game.players[i].snake.points));
                 }
             }
         
