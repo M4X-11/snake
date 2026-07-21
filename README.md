@@ -7,6 +7,7 @@ snake but multiplayer
 1:
 ```
 git clone https://github.com/M4X-11/snake.git
+cd snake
 ```
 2:
 
