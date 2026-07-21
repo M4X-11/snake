@@ -9,6 +9,7 @@ snake but multiplayer
 git clone https://github.com/M4X-11/snake.git
 ```
 2:
+
 debian:
 ```
 sudo apt install libncurses-dev
