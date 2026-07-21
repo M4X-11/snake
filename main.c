@@ -160,6 +160,7 @@ int main()
         send(game.players[i].socket, &i, sizeof(int), 0);
     }
 
+    //init
     for (int i = 0; i < connected; i++) {
         appleRand(&game.players[i].snake.x,
                 &game.players[i].snake.y);
@@ -168,6 +169,7 @@ int main()
         game.players[i].snake.oldY = game.players[i].snake.y;
         game.players[i].snake.direction = RIGHT;
         game.players[i].snake.points = 0;
+        game.players[i].dead=0;
     }
 
     //init
@@ -258,15 +260,34 @@ int main()
             for (int i=0; i<connected; i++){
                 if (game.players[i].snake.x==game.apple[0].x && game.players[i].snake.y==game.apple[0].y){
                     game.players[i].snake.points++;
-                    game.apple[0].y=-1;
-                    game.apple[0].x=-1;
+                    game.apple[0].y=-1000;
+                    game.apple[0].x=-1000;
                 }
             }
-            
+        
+            //death
+            for (int i=0; i<connected; i++){
+                for (int j=0; j<connected; j++){
+                    if (isBodyAt(game.players[i].snake.x, game.players[i].snake.y, game.players[j].snake.body, game.players[j].snake.points)==1){
+                        game.players[i].snake.x=-1;
+                        game.players[i].snake.y=-1;
+                        game.players[i].dead=1;
+                        printf("player[%d] dead", i);
+                        fflush(stdout);
+                    }
+                }
+            }
 
+        //networking
+        //packet optimization
+        packet.apple[0].x=game.apple[0].x;
+        packet.apple[0].y=game.apple[0].y;
         
         // send game state
         for (int i=0; i<connected; i++){
+            packet.players[i].x=game.players[i].snake.x;
+            packet.players[i].y=game.players[i].snake.y;
+            //send(game.players[i].socket, &packet, sizeof(packet), 0);
             send(game.players[i].socket, &game, sizeof(game), 0);
         }
         usleep(100000);

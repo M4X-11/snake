@@ -1,4 +1,4 @@
-#define MAX_PLAYERS 32
+#define MAX_PLAYERS 6
 
 enum Direction {
     UP,
@@ -30,6 +30,7 @@ typedef struct {
     int socket;
     Snake snake;
     int connected;
+    int dead;
 } Player;
 
 //Player players[MAX_PLAYERS];
@@ -50,3 +51,18 @@ typedef struct {
 } Package;
 
 Package game;
+
+////////
+
+typedef struct {
+    
+    int x;
+    int y;
+    
+} PlayerP;
+
+typedef struct {
+    AppleS apple[MAX_PLAYERS];
+    PlayerP players[MAX_PLAYERS];
+} Packets;
+Packets packet;

@@ -46,6 +46,10 @@ int displ()
         mvaddch(game.players[i].snake.y + 2, game.players[i].snake.x + 1, '@');
     }
     
+    if (game.players[me].dead==1){
+        mvprintw(19, 0, "DEAD");
+    }
+
 
     mvprintw(23, 0, "Package size: %d", bytes);
     mvprintw(21, 0, "Package size: %zu", sizeof(Package));
@@ -118,16 +122,28 @@ int main() {
         switch (key)
         {
             case KEY_UP:
-                game.players[me].snake.direction = UP;
+                if (game.players[me].snake.direction != DOWN)
+                {
+                    game.players[me].snake.direction = UP;
+                }
                 break;
             case KEY_DOWN:
-                game.players[me].snake.direction = DOWN;
+                if (game.players[me].snake.direction != UP)
+                {
+                    game.players[me].snake.direction = DOWN;
+                }
                 break;
             case KEY_LEFT:
-                game.players[me].snake.direction = LEFT;
+                if (game.players[me].snake.direction != RIGHT)
+                {
+                    game.players[me].snake.direction = LEFT;
+                }
                 break;
             case KEY_RIGHT:
-                game.players[me].snake.direction = RIGHT;
+                if (game.players[me].snake.direction != LEFT)
+                {
+                    game.players[me].snake.direction = RIGHT;
+                }
                 break;
         }
 
