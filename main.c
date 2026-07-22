@@ -171,6 +171,7 @@ int main()
         game.players[i].snake.direction = RIGHT;
         game.players[i].snake.points = 0;
         game.players[i].dead='a';
+        packet.players[i].dead='d';
     }
 
     //init
@@ -278,6 +279,7 @@ int main()
                         game.players[i].snake.x=-1000;
                         game.players[i].snake.y=-1000;
                         game.players[i].dead='d';
+                        packet.players[i].dead='d';
                         printf("player[%d] dead", i);
                         fflush(stdout);
                     }

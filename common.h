@@ -58,6 +58,7 @@ typedef struct {
     
     int x;
     int y;
+    char dead;
     
 } PlayerP;
 

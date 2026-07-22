@@ -46,7 +46,7 @@ int displ()
         mvaddch(game.players[i].snake.y + 2, game.players[i].snake.x + 1, '@');
     }
     
-    if (game.players[me].dead=='d'){
+    if (packet.players[me].dead=='d'){
         mvprintw(20, 0, "DEAD");
     }
 
@@ -112,6 +112,11 @@ int main() {
     while (1)
     {
 
+        //update snake head
+            for (int i=0; i<game.connections; i++){
+                game.players[i].snake.oldX = game.players[i].snake.x;
+                game.players[i].snake.oldY = game.players[i].snake.y;
+            }
         //get res
         
         //printf("\nsend: ");
@@ -151,10 +156,25 @@ int main() {
             send(network_socket, &game.players[me].snake.direction, sizeof(game.players[0].snake.direction), 0);
         }
         
+        
 
         //recv(network_socket, &game, sizeof(game), 0);
-        bytes = recvAll(network_socket, &game, sizeof(game));
+        bytes = recvAll(network_socket, &packet, sizeof(packet));
+        for (int i=0; i<game.connections; i++){
+                game.players[i].snake.x = packet.players[i].x;
+                game.players[i].snake.y = packet.players[i].y;
+            }
+        
         //bytes = recv(network_socket, &game, sizeof(game), 0);
+
+        // update snake body
+            for (int i=0; i<game.connections; i++){
+                for (int j = game.players[i].snake.points; j > 0; j--)
+                    game.players[i].snake.body[j] = game.players[i].snake.body[j-1];
+
+                game.players[i].snake.body[0].x = game.players[i].snake.oldX;
+                game.players[i].snake.body[0].y = game.players[i].snake.oldY;
+            }
 
         displ();
 
