@@ -65,5 +65,6 @@ typedef struct {
 typedef struct {
     AppleS apple[MAX_PLAYERS];
     PlayerP players[MAX_PLAYERS];
+    int connections;
 } Packets;
 Packets packet;

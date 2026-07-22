@@ -160,10 +160,11 @@ int main() {
 
         //recv(network_socket, &game, sizeof(game), 0);
         bytes = recvAll(network_socket, &packet, sizeof(packet));
-        for (int i=0; i<game.connections; i++){
+        for (int i=0; i<packet.connections; i++){
                 game.players[i].snake.x = packet.players[i].x;
                 game.players[i].snake.y = packet.players[i].y;
             }
+        game.connections=packet.connections;
         
         //bytes = recv(network_socket, &game, sizeof(game), 0);
 

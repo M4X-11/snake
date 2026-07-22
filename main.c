@@ -290,6 +290,7 @@ int main()
         //packet optimization
         packet.apple[0].x=game.apple[0].x;
         packet.apple[0].y=game.apple[0].y;
+        packet.connections=connected;
         
         // send game state
         for (int i=0; i<connected; i++){
