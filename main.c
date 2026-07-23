@@ -171,7 +171,7 @@ int main()
         game.players[i].snake.direction = RIGHT;
         game.players[i].snake.points = 0;
         game.players[i].dead='a';
-        packet.players[i].dead='d';
+        packet.players[i].dead='a';
     }
 
     //init

@@ -52,7 +52,7 @@ int displ()
 
 
     mvprintw(23, 0, "Package size: %d", bytes);
-    mvprintw(21, 0, "Package size: %zu", sizeof(Package));
+    mvprintw(21, 0, "Package size: %zu", sizeof(Packets));
     refresh();
     return 0;
 }
