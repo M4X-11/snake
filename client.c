@@ -33,17 +33,21 @@ int displ()
 
     // Draw body
     for (int i=0; i<game.connections; i++){
-        for (int j = 0; j < packet.players[i].points; j++)
+        attron(COLOR_PAIR(i+1));
+        for (int j = 0; j < packet.players[i].points; j++){
             mvaddch(game.players[i].snake.body[j].y + 2, game.players[i].snake.body[j].x + 1, '*');
             }
-    
+        attroff(COLOR_PAIR(i+1));
+        }
 
     // Apple
     mvaddch(packet.apple->y + 2, packet.apple->x + 1, 'o');
 
     // Head
     for (int i=0; i<game.connections; i++){
+        attron(COLOR_PAIR(i+1));
         mvaddch(game.players[i].snake.y + 2, game.players[i].snake.x + 1, '@');
+        attroff(COLOR_PAIR(i+1));
     }
     
     if (packet.players[me].dead=='d'){
@@ -107,6 +111,15 @@ int main() {
 
     keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
+
+    start_color();
+    init_pair(1, COLOR_RED,     COLOR_BLACK);
+    init_pair(2, COLOR_GREEN,   COLOR_BLACK);
+    init_pair(3, COLOR_YELLOW,  COLOR_BLACK);
+    init_pair(4, COLOR_BLUE,    COLOR_BLACK);
+    init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(6, COLOR_CYAN,    COLOR_BLACK);
+    init_pair(7, COLOR_WHITE,   COLOR_BLACK);
 
 
     while (1)

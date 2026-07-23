@@ -32,6 +32,11 @@ int isBodyAt(int x, int y, Segment body[], int bodyLength)
     return 0;
 }
 
+int isOutOfBounds(int x, int y)
+{
+    return (x < 0 || x >= 45 || y < 0 || y >= 17);
+}
+
 int main()
 {
     srand(time(NULL));
@@ -275,7 +280,7 @@ int main()
             //death
             for (int i=0; i<connected; i++){
                 for (int j=0; j<connected; j++){
-                    if (isBodyAt(game.players[i].snake.x, game.players[i].snake.y, game.players[j].snake.body, game.players[j].snake.points)==1){
+                    if ((isBodyAt(game.players[i].snake.x, game.players[i].snake.y, game.players[j].snake.body, game.players[j].snake.points)==1) || (isOutOfBounds(game.players[i].snake.x, game.players[i].snake.y))){
                         game.players[i].snake.x=-1000;
                         game.players[i].snake.y=-1000;
                         game.players[i].dead='d';
