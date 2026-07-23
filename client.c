@@ -17,7 +17,7 @@ int displ()
 {
     clear();
 
-    mvprintw(0, 0, "Points: %d", game.players[me].snake.points);
+    mvprintw(0, 0, "Points: %d", packet.players[me].points);
 
     for (int i = 0; i < 47; i++)
         mvaddch(1, i, '#');
@@ -33,13 +33,13 @@ int displ()
 
     // Draw body
     for (int i=0; i<game.connections; i++){
-        for (int j = 0; j < game.players[i].snake.points; j++)
+        for (int j = 0; j < packet.players[i].points; j++)
             mvaddch(game.players[i].snake.body[j].y + 2, game.players[i].snake.body[j].x + 1, '*');
             }
     
 
     // Apple
-    mvaddch(game.apple->y + 2, game.apple->x + 1, 'o');
+    mvaddch(packet.apple->y + 2, packet.apple->x + 1, 'o');
 
     // Head
     for (int i=0; i<game.connections; i++){
@@ -170,7 +170,7 @@ int main() {
 
         // update snake body
             for (int i=0; i<game.connections; i++){
-                for (int j = game.players[i].snake.points; j > 0; j--)
+                for (int j = packet.players[i].points; j > 0; j--)
                     game.players[i].snake.body[j] = game.players[i].snake.body[j-1];
 
                 game.players[i].snake.body[0].x = game.players[i].snake.oldX;

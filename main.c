@@ -292,12 +292,14 @@ int main()
         packet.apple[0].y=game.apple[0].y;
         packet.connections=connected;
         
+        
         // send game state
         for (int i=0; i<connected; i++){
+            packet.players[i].points=game.players[i].snake.points;
             packet.players[i].x=game.players[i].snake.x;
             packet.players[i].y=game.players[i].snake.y;
             //send(game.players[i].socket, &packet, sizeof(packet), 0);
-            send(game.players[i].socket, &game, sizeof(game), 0);
+            send(game.players[i].socket, &packet, sizeof(packet), 0);
         }
         usleep(100000);
     }

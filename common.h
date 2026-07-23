@@ -58,6 +58,7 @@ typedef struct {
     
     int x;
     int y;
+    int points;
     char dead;
     
 } PlayerP;
