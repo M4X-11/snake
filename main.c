@@ -34,7 +34,7 @@ int isBodyAt(int x, int y, Segment body[], int bodyLength)
 
 int isOutOfBounds(int x, int y)
 {
-    return (x == 0 || x == 45 || y == 0 || y == 17);
+    return (x == -1 || x == 45 || y == -1 || y == 17);
 }
 
 int main()
