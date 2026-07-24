@@ -97,8 +97,9 @@ int main() {
 
     //create connect
     int connection_status = connect(network_socket, (struct sockaddr *) &server_address, sizeof(server_address));
-    if (connection_status ==-1) {
-        printf("ERROR");
+    while (connection_status ==-1) {
+        int connection_status = connect(network_socket, (struct sockaddr *) &server_address, sizeof(server_address));
+        usleep(100000);
         return 1;
     }
 

@@ -105,6 +105,8 @@ int main()
         // Wait until something happens
         select(max_fd + 1, &readfds, NULL, NULL, NULL);
 
+        
+
 
         // Someone typed something
         if (FD_ISSET(STDIN_FILENO, &readfds))
@@ -191,7 +193,13 @@ int main()
         fd_set readfds;
         FD_ZERO(&readfds);
 
-        int maxfd = -1;
+        //int maxfd = -1;
+        FD_SET(STDIN_FILENO, &readfds);
+
+        int maxfd = STDIN_FILENO;
+
+        
+        //
 
         for (int i = 0; i < connected; i++) {
             FD_SET(game.players[i].socket, &readfds);
@@ -205,6 +213,37 @@ int main()
         tv.tv_usec = 100000;      // 100 ms
 
         select(maxfd + 1, &readfds, NULL, NULL, &tv);
+
+        if (FD_ISSET(STDIN_FILENO, &readfds))
+        {
+            char cmd[100];
+
+            fgets(cmd, sizeof(cmd), stdin);
+
+            if (strcmp(cmd, "restart\n") == 0)
+            {
+                printf("Restarting game...\n");
+
+                // Reset every player
+                for (int i = 0; i < connected; i++)
+                {
+                    appleRand(&game.players[i].snake.x,
+                            &game.players[i].snake.y);
+
+                    game.players[i].snake.oldX = game.players[i].snake.x;
+                    game.players[i].snake.oldY = game.players[i].snake.y;
+                    game.players[i].snake.points = 0;
+                    game.players[i].snake.direction = RIGHT;
+                    game.players[i].dead = 'a';
+
+                    memset(game.players[i].snake.body,
+                        0,
+                        sizeof(game.players[i].snake.body));
+                }
+
+                appleRand(&game.apple[0].x, &game.apple[0].y);
+            }
+        }//
 
         for (int i = 0; i < connected; i++) {
 
