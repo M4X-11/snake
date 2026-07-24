@@ -34,7 +34,7 @@ int isBodyAt(int x, int y, Segment body[], int bodyLength)
 
 int isOutOfBounds(int x, int y)
 {
-    return (x < 0 || x >= 45 || y < 0 || y >= 17);
+    return (x == 0 || x == 45 || y == 0 || y == 17);
 }
 
 int main()
@@ -235,6 +235,7 @@ int main()
                     game.players[i].snake.points = 0;
                     game.players[i].snake.direction = RIGHT;
                     game.players[i].dead = 'a';
+                    packet.players[i].dead = 'a';
 
                     memset(game.players[i].snake.body,
                         0,
